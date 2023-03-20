@@ -1,1 +1,88 @@
-Привет!
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Сайт для поиска по ИНН</title>
+    <style>
+        *:root {
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .search {
+            width: 50vw;
+            height: min-content;
+
+            min-width: max-content;
+            min-height: max-content;
+
+            border-radius: 10px;
+            border: 2px solid #000;
+
+            padding: 20px;
+        }
+
+        .search form label {
+            font-weight: 700;
+            font-size: 20px;
+        }
+
+        .search form input {
+            font-weight: 400;
+            font-size: 15px;
+            width: 60%;
+            margin-top: 10px;
+        }
+
+        .search form input:valid {
+            background-color: palegreen;
+        }
+
+        .search form input:invalid {
+            background-color: lightpink;
+        }
+
+        .search form button {
+            font-weight: 700;
+            font-size: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="search">
+        <form>
+            <label>Введите ИНН</label>
+            <br>
+            <input id="inn-enter" type="text" pattern="(?:\d{10}|\d{12})" required>
+            <button id="submit" disabled>Поиск</button>
+        </form>
+    </div>
+    <!-- <div class="result"></div> -->
+    <script>
+        const sl = (id) => document.getElementById(id);
+
+        sl('inn-enter').onkeypress = (e) => {
+            if (!/\d/.test(e.key)) {
+                e.preventDefault();
+            }
+        };
+        sl('inn-enter').onkeyup = (e) => {
+            if (/(?:\d{10}|\d{12})/.test(sl('inn-enter').value)) {
+                sl('submit').disabled = false;
+            } else {
+                sl('submit').disabled = true;
+            }
+        }
+    </script>
+</body>
+
+</html>
